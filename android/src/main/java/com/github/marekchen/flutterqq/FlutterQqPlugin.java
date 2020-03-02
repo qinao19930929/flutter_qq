@@ -82,11 +82,21 @@ public class FlutterQqPlugin implements MethodCallHandler {
     private void registerQQ(MethodCall call, Result result) {
         String mAppid = call.argument("appId");
         mTencent = Tencent.createInstance(mAppid, registrar.context());
-        result.success(true);
+        try {
+            if (result != null) {
+                result.success(true);
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void isQQInstalled(MethodCall call, Result result) {
-        result.success(mTencent.isQQInstalled(registrar.activeContext()));
+        try {
+            if (result != null) {
+                result.success(mTencent.isQQInstalled(registrar.activeContext()));
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void login(MethodCall call, final OneListener listener) {
@@ -175,14 +185,24 @@ public class FlutterQqPlugin implements MethodCallHandler {
                 if (null == response) {
                     re.put("Code", 1);
                     re.put("Message", "response is empty");
-                    result.success(re);
+                    try {
+                        if (result != null) {
+                            result.success(re);
+                        }
+                    } catch (Exception e) {
+                    }
                     return;
                 }
                 JSONObject jsonResponse = (JSONObject) response;
                 if (null != jsonResponse && jsonResponse.length() == 0) {
                     re.put("Code", 1);
                     re.put("Message", "response is empty");
-                    result.success(re);
+                    try {
+                        if (result != null) {
+                            result.success(re);
+                        }
+                    } catch (Exception e) {
+                    }
                     return;
                 }
                 Map<String, Object> resp = new HashMap<>();
@@ -195,18 +215,33 @@ public class FlutterQqPlugin implements MethodCallHandler {
                     re.put("Code", 0);
                     re.put("Message", "ok");
                     re.put("Response", resp);
-                    result.success(re);
+                    try {
+                        if (result != null) {
+                            result.success(re);
+                        }
+                    } catch (Exception e) {
+                    }
                     return;
                 } catch (Exception e) {
                     re.put("Code", 1);
                     re.put("Message", e.getLocalizedMessage());
-                    result.success(re);
+                    try {
+                        if (result != null) {
+                            result.success(re);
+                        }
+                    } catch (Exception e2) {
+                    }
                     return;
                 }
             }
             re.put("Code", 0);
             re.put("Message", response.toString());
-            result.success(re);
+            try {
+                if (result != null) {
+                    result.success(re);
+                }
+            } catch (Exception e) {
+            }
         }
 
         @Override
@@ -215,7 +250,12 @@ public class FlutterQqPlugin implements MethodCallHandler {
             Map<String, Object> re = new HashMap<>();
             re.put("Code", 1);
             re.put("Message", "errorCode:" + uiError.errorCode + ";errorMessage:" + uiError.errorMessage);
-            result.success(re);
+            try {
+                if (result != null) {
+                    result.success(re);
+                }
+            } catch (Exception e) {
+            }
         }
 
         @Override
@@ -224,7 +264,12 @@ public class FlutterQqPlugin implements MethodCallHandler {
             Map<String, Object> re = new HashMap<>();
             re.put("Code", 2);
             re.put("Message", "cancel");
-            result.success(re);
+            try {
+                if (result != null) {
+                    result.success(re);
+                }
+            } catch (Exception e) {
+            }
         }
 
         @Override
