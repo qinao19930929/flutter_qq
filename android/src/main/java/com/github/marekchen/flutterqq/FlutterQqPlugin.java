@@ -107,7 +107,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
     private void doShareToQQ(MethodCall call, final OneListener listener) {
         final Bundle params = new Bundle();
         int shareType = call.argument("shareType");
-        Log.i("FlutterQqPlugin", "arguments:" + call.arguments);
+//        Log.i("FlutterQqPlugin", "arguments:" + call.arguments);
         if (shareType != QQShare.SHARE_TO_QQ_TYPE_IMAGE) {
             params.putString(QQShare.SHARE_TO_QQ_TITLE, (String) call.argument("title"));
             params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, (String) call.argument("targetUrl"));
@@ -125,7 +125,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
             params.putString(QQShare.SHARE_TO_QQ_AUDIO_URL, (String) call.argument("audioUrl"));
         }
         params.putString(QQShare.SHARE_TO_QQ_ARK_INFO, (String) call.argument("ark"));
-        Log.i("FlutterQqPlugin", "params:" + params);
+//        Log.i("FlutterQqPlugin", "params:" + params);
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -137,7 +137,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
     private void doShareToQzone(MethodCall call, final OneListener listener) {
         final Bundle params = new Bundle();
         int shareType = call.argument("shareType");
-        Log.i("FlutterQqPlugin", "arguments:" + call.arguments);
+//        Log.i("FlutterQqPlugin", "arguments:" + call.arguments);
         params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, shareType);
         params.putString(QzoneShare.SHARE_TO_QQ_TITLE, (String) call.argument("title"));
         params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, (String) call.argument("summary"));
@@ -151,7 +151,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
         bundle2.putString(QzonePublish.HULIAN_EXTRA_SCENE, (String) call.argument("scene"));
         bundle2.putString(QzonePublish.HULIAN_CALL_BACK, (String) call.argument("hulian_call_back"));
         params.putBundle(QzonePublish.PUBLISH_TO_QZONE_EXTMAP, bundle2);
-        Log.i("FlutterQqPlugin", "params:" + params);
+//        Log.i("FlutterQqPlugin", "params:" + params);
         if (shareType == QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
@@ -179,7 +179,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
 
         @Override
         public void onComplete(Object response) {
-            Log.i("FlutterQqPlugin", response.toString());
+//            Log.i("FlutterQqPlugin", response.toString());
             Map<String, Object> re = new HashMap<>();
             if (isLogin) {
                 if (null == response) {
@@ -207,7 +207,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
                 }
                 Map<String, Object> resp = new HashMap<>();
                 try {
-                    Log.i("FlutterQqPlugin", resp.toString());
+//                    Log.i("FlutterQqPlugin", resp.toString());
                     resp.put("openid", jsonResponse.getString(Constants.PARAM_OPEN_ID));
                     resp.put("accessToken", jsonResponse.getString(Constants.PARAM_ACCESS_TOKEN));
                     resp.put("expiresAt", jsonResponse.getLong(Constants.PARAM_EXPIRES_TIME));
@@ -246,7 +246,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
 
         @Override
         public void onError(UiError uiError) {
-            Log.w("FlutterQqPlugin", "errorCode:" + uiError.errorCode + ";errorMessage:" + uiError.errorMessage);
+//            Log.w("FlutterQqPlugin", "errorCode:" + uiError.errorCode + ";errorMessage:" + uiError.errorMessage);
             Map<String, Object> re = new HashMap<>();
             re.put("Code", 1);
             re.put("Message", "errorCode:" + uiError.errorCode + ";errorMessage:" + uiError.errorMessage);
@@ -260,7 +260,7 @@ public class FlutterQqPlugin implements MethodCallHandler {
 
         @Override
         public void onCancel() {
-            Log.w("FlutterQqPlugin", "error:cancel");
+//            Log.w("FlutterQqPlugin", "error:cancel");
             Map<String, Object> re = new HashMap<>();
             re.put("Code", 2);
             re.put("Message", "cancel");
